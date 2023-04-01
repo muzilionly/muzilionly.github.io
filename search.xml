@@ -4,6 +4,33 @@
   
     
     <entry>
+      <title>基于 Hexo 从零开始搭建个人博客（二）</title>
+      <link href="/2023/04/01/hexobutterfly002/"/>
+      <url>/2023/04/01/hexobutterfly002/</url>
+      
+        <content type="html"><![CDATA[<div class="note info no-icon flat"><p>阅读本篇前，请先配置好响应的环境，请仔细阅读教程<a href="../hexobutterfly001/">基于 Hexo 从零开始搭建个人博客（一）</a></p></div><h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><ol><li>博客搭建过程中遇到问题，可以现在本页面搜索，检查是是否已经有该配置教程。</li><li>遇到问题可以在文章评论区留言，注意留言时请填写正确的邮箱以确保能收到回复。</li><li>实在解决不了的问题可添加QQ或Wechat，添加好友时请备注自己的姓名+专业，如张学友 计算机科学与技术。</li></ol><h3 id="初始化Hexo项目"><a href="#初始化Hexo项目" class="headerlink" title="初始化Hexo项目"></a>初始化Hexo项目</h3><ol><li><p>在目标路径（我这里选择路径为【D:\web\WWW\blog-demo】）打开cmd命令窗口，执行 <code>hexo init</code>初始化项目。</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo init blog-demo(项目名，可自行更改)</span><br></pre></td></tr></table></figure><p><img src="/img/loading.gif" data-original="/2023/04/01/hexobutterfly002/hexoinit.jpg" alt="hexoinit.jpg"></p></li><li><p>进入<code>blog-demo</code>, 输入<code>npn i</code> 安装相关依赖</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> blog-demo //进入blog-demo文件夹</span><br><span class="line">npm i</span><br></pre></td></tr></table></figure><p><img src="/img/loading.gif" data-original="/2023/04/01/hexobutterfly002/npm-i.jpg" alt="npm-i.jpg"></p></li><li><p>初始化项目后，blog-demo有如下结构<br>【node_modules】：依赖包<br>【scaffolds】：生成文章的一些模板<br>【source】：用来存放你的文章<br>【themes】：主题<br>【.npmignore】：发布时忽略的文件（可忽略）<br>【_config.landscape.yml】：主题的配置文件<br>【_config.yml】：博客的配置文件<br>【package.json】：项目名称、描述、版本、运行和开发等信息<br><img src="/img/loading.gif" data-original="/2023/04/01/hexobutterfly002/blog-demo.jpg" alt="blog-demo.jpg"></p></li><li><p>输入<code>hexo server</code>或者<code>hexo s</code>。<br><img src="/img/loading.gif" data-original="/2023/04/01/hexobutterfly002/hexo-s.jpg" alt="hexo-s.jpg"></p></li><li><p>打开浏览器，输入地址：<code>http://localhost:4000/</code> ，看到下面的效果，说明你的博客已经构建成功了。<br><img src="/img/loading.gif" data-original="/2023/04/01/hexobutterfly002/hexo.jpg" alt="hexo.jpg"></p></li></ol><h3 id="将静态博客挂载到-GitHub-Pages"><a href="#将静态博客挂载到-GitHub-Pages" class="headerlink" title="将静态博客挂载到 GitHub Pages"></a>将静态博客挂载到 GitHub Pages</h3><p>上一篇文章中，我们已经完成了对 GitHub 账户的注册以及 Github Pages 的创建，并且为 GitHub 配置了 SSH key, 我们将博客部署到 GitHub Pages 上即可。</p><h4 id="安装-hexo-deployer-git"><a href="#安装-hexo-deployer-git" class="headerlink" title="安装 hexo-deployer-git"></a>安装 hexo-deployer-git</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-deployer-git --save</span><br></pre></td></tr></table></figure><h4 id="修改-config-yml-文件"><a href="#修改-config-yml-文件" class="headerlink" title="修改 _config.yml 文件"></a>修改 _config.yml 文件</h4><p>在<code>blog-demo</code>目录下的<code>_config.yml</code>，就是整个<code>Hexo</code>框架的配置文件了。可以在里面修改大部分的配置。详细可参考官方的配置描述</p><p>修改最后一行的配置，将repository修改为你自己的github项目地址即可。</p><div class="note info no-icon flat"><p>请检查自己的默认分支是不是<code>master</code>。</p></div><figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">deploy:</span></span><br><span class="line">  <span class="attr">type:</span> <span class="string">git</span></span><br><span class="line">  <span class="attr">repository:</span> <span class="string">git@github.com:muzilionly/muzilionly.github.io.git</span></span><br><span class="line">  <span class="attr">branch:</span> <span class="string">master</span></span><br></pre></td></tr></table></figure><h4 id="部署项目到-GitHub"><a href="#部署项目到-GitHub" class="headerlink" title="部署项目到 GitHub"></a>部署项目到 GitHub</h4><p>修改好配置后，运行如下命令，将代码部署到 GitHub。</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">hexo clean</span><br><span class="line">hexo generate</span><br><span class="line">hexo deploy</span><br></pre></td></tr></table></figure><ul><li>hexo clean：删除之前生成的文件，若未生成过静态文件，可忽略此命令。</li><li>hexo generate：生成静态文章，可以用<code>hexo g</code>缩写</li><li>hexo deploy：部署文章，可以用<code>hexo d</code>缩写</li></ul><p>如果出现<code>Deploy done</code>，则说明部署成功了。</p><p>打开浏览器访问：<a href="https://muzlionly.github.io">https://muzlionly.github.io</a> ，这时候我们就可以看到博客内容了。</p><div class="note warning no-icon flat"><p>部署可能不会立即生效，过一两分钟也是正常的哟！</p></div><p>那么，今天就讲到这里吧，立马去尝试一下吧！😀😀😀</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> Butterfly </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> hexo </tag>
+            
+            <tag> butterfly </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>基于 Hexo 从零开始搭建个人博客（一）</title>
       <link href="/2023/03/25/hexobutterfly001/"/>
       <url>/2023/03/25/hexobutterfly001/</url>

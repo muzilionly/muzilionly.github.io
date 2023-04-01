@@ -338,3 +338,8 @@ body,
     border-radius: 8px;
   } */
   /* 侧边栏个人信息卡片动态渐变色end*/
+
+/*飞只因底部出现滚动*/
+#drone .container {
+    overflow: hidden;
+}
